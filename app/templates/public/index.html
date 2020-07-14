@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="UTF-8"> 
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
-      <title>Index</title>
-   </head>	
-   <body>
-       <center>
-            <h1 style="color: cornflowerblue;">Jamie Brown</h1>
-      </center>
-      <hr />
-      <center>
-      <img style="max-width: 500px;" src="{{ url_for('static', filename='img/italian_gardens.jpg') }}">
-      <p> look it be a pretty picture i took on a loverly walk in a field</p>
-      </center>
-      <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-   </body>	
-</html>
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}Jamie Brown{% endblock title %}
+
+{% block main %}
+
+
+<div class="container">
+   <div class="row">
+      <div class="col">
+         <h1>Home</h1>
+      </div>
+   </div>
+</div>
+
+{% endblock main %}

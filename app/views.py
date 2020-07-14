@@ -7,8 +7,12 @@ def index():
 
 @app.route('/cv')
 def cv():
-    return 'cv'
+    return render_template('public/cv.html') 
 
-@app.route('/projects')
-def projects():
-    return 'projects'
+@app.route('/blog')
+def blog():
+    return render_template('public/blog.html') 
+
+@app.route('/websynth')
+def websynth():
+    return render_template('public/websynth.html') 
