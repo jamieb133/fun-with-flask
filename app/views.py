@@ -2,6 +2,7 @@ from app import app
 
 from flask import render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 from datetime import datetime
 import json
 
@@ -19,6 +20,8 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+bcrypt = Bcrypt(app)
 
 def create_db():
     db.create_all()
@@ -62,13 +65,14 @@ def websynth_signup():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        print(email, username, password)
+        #hashed_pw = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
+        hashed_pw = bcrypt.generate_password_hash(password).decode('utf-8')
 
         #TODO: check user is/isn't in database
         #IF already if exists THEN return render_template('/public/websynth/signup.html', message='Already exists, try again')
         if db.session.query(AccountDetails).filter(AccountDetails.username == username).count() == 0:
             #new user TODO: encrypt password 
-            data = AccountDetails(username, email, password)
+            data = AccountDetails(username, email, hashed_pw)
             db.session.add(data)
             db.session.commit()
 
@@ -89,6 +93,8 @@ def websynth_login():
     try:
         message = request.args['message']
         print(message)
+    except:
+        pass
     finally:
         if request.method == 'POST':
             username = request.form['username']
@@ -98,7 +104,8 @@ def websynth_login():
             #validate that there is only one username of this type, otherwise send email to admin notifying of mess up in the db
             if len(rows) == 1:
                 account = rows[0]
-                if password == account.password:
+                password_bytes = password.encode('utf8')
+                if bcrypt.check_password_hash(account.password, password):
                     print('SUCCESSFUL LOGIN')
                     #TODO: create user session
                 else:
