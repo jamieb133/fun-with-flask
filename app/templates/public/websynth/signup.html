@@ -1,0 +1,28 @@
+{% extends "public/templates/public_template.html" %}
+{% import "/macros/input_macros.html" as im %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="col">
+        <div class="card bg-light text-center" style="width: 18 rem;">
+            <div class="card-header">Create Account</div>
+                <div class="card-body">
+                    <form action="/websynth/sign-up" method="POST">
+                        {{ im.input(label="", name="username", id="username", placeholder="Enter a username") }}
+                        {{ im.input(label="", type="email", name="email", id="email", placeholder="Enter your email") }}
+                        {{ im.input(label="", type="password", name="password", id="password", placeholder="Enter a password") }}
+                        {% if message %}
+                        <p class="message">{{ message | safe }}</p>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary">Submit</button> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

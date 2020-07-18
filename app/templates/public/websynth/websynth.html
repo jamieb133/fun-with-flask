@@ -1,0 +1,26 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}WebSynth{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>WebSynth</h1>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card text-center bg-light mb-3" style="width: 18rem;">
+        <div class="card-header"> Access Custom WebSynth Presets </div>
+        <div class="card-body">
+            <a type="button" class="btn btn-outline-info" href="/websynth/sign-up" role="button">Sign Up</a>
+            <a type="button" class="btn btn-outline-info" href="/websynth/log-in" role="button">Log In</a>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
